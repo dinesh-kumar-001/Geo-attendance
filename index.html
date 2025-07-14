@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geolocation Attendance App</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+</head>
+<body>
+  <div id="logo-container">
+    <img src="ksr_geo.png" alt="Attendance Logo" id="attendance-logo">
+  </div>
+  <h2>K.S.R. Geolocation Based Attendance Tracker</h2>
+
+  <!-- Registration Form -->
+  <div id="register-form">
+    <h3>Register</h3>
+    <form id="userRegisterForm">
+      <label for="reg-email">Email:</label>
+      <input type="email" id="reg-email" required placeholder="Enter your email"><br><br>
+
+      <label for="reg-password">Password:</label>
+      <div style="position: relative; display: inline-block; width: 80%; max-width: 300px;">
+      <input type="password" id="reg-password" required placeholder="Enter your password">
+      <i class="fas fa-eye" id="toggle-reg-password" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+      </div><br><br>
+
+      <label for="user-role">Role:</label>
+      <select id="user-role" required>
+        <option value="">Select Role</option>
+        <option value="student">Student</option>
+        <option value="admin">Admin</option>
+      </select><br><br>
+      
+      <div id="error-message" style="color: red; display: none;"></div>
+
+      <button id="register-btn" type="submit">Register</button>
+      <p>Already have an account? <a id="login-here" href="#" onclick="showLogin()">Login here</a></p>
+    </form>
+  </div>
+
+  <!-- Login Form -->
+  <div id="login-form" style="display:none;">
+    <h3>Login</h3>
+    <form id="userLoginForm">
+      <label for="email">Email:</label>
+      <input type="email" id="email" required placeholder="Enter your email"><br><br>
+
+      <label for="password">Password:</label>
+      <div style="position: relative; display: inline-block; width: 80%; max-width: 300px;">
+      <input type="password" id="password" required placeholder="Enter your password">
+      <i class="fas fa-eye" id="toggle-password" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+      </div><br>
+      <p><a id="forgot-password" href="#" onclick="showForgotPassword()">Forgot Password?</a></p>
+      <button id="login-btn" type="submit">Login</button>
+      <p>Don't have an account? <a id="register-here" href="#" onclick="showRegister()">Register here</a></p>
+    </form>
+    
+  </div>
+
+  <!-- Student Attendance Form -->
+  <div id="attendance-form" style="display:none;">
+    <h3>Mark Your Attendance</h3>
+    <p id="location-status">Location: Checking...</p>
+    <button id="mark-attendance-btn">Mark Attendance</button>
+    <button id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+  </div>
+
+  <!-- Student Attendance Data Section -->
+  <div id="attendance-data" style="display:none;">
+    <h3>Your Attendance Records</h3>
+    <button id="export-pdf-btn"><i class="fas fa-file-pdf"></i> Export to PDF</button>
+    <div id="table-container">
+    <table id="attendance-table">
+      <thead>
+        <tr>
+          <th>S.No.</th>
+          <th>Date(MM/DD/YYYY), Time</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Attendance records will be inserted here -->
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- Forgot Password Form -->
+  <div id="forgot-password-form" style="display:none;">
+    <h3>Forgot Password</h3>
+    <form id="forgotPasswordForm">
+      <label for="forgot-email">Email:</label>
+      <input type="email" id="forgot-email" required placeholder="Enter your registered email"><br><br>
+      
+      <button id="reset-btn" type="submit">Reset Password</button>
+      <p>Remember your password? <a href="#" onclick="showLogin()">Login here</a></p>
+    </form>
+  </div>
+
+  <!-- Reset Password Form -->
+  <div id="reset-password-form" style="display:none;">
+    <h3>Reset Password</h3>
+    <form id="resetPasswordForm">
+      <input type="hidden" id="reset-email">
+      
+      <label for="new-password">New Password:</label>
+      <div style="position: relative; display: inline-block; width: 80%; max-width: 300px;">
+        <input type="password" id="new-password" required placeholder="Enter new password">
+        <i class="fas fa-eye" id="toggle-new-password" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+      </div><br><br>
+      
+      <label for="confirm-password">Confirm Password:</label>
+      <div style="position: relative; display: inline-block; width: 80%; max-width: 300px;">
+        <input type="password" id="confirm-password" required placeholder="Confirm new password">
+        <i class="fas fa-eye" id="toggle-confirm-password" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+      </div><br><br>
+      
+      <div id="reset-error-message" style="color: red; display: none;"></div>
+      
+      <button id="update-btn" type="submit">Update Password</button>
+    </form>
+  </div>
+
+  <br>
+  <!-- Admin Dashboard -->
+  <div id="admin-dashboard" style="display:none;">
+    <h3>Admin Dashboard</h3>
+    <div class="admin-controls">
+      <button id="export-all-pdf-btn"><i class="fas fa-file-pdf"></i> Export All to PDF</button>
+      <button id="admin-logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+    
+    <div id="admin-table-container">
+      <table id="admin-attendance-table">
+        <thead>
+          <tr>
+            <th>S.No.</th>
+            <th>Student Email</th>
+            <th>Date(MM/DD/YYYY), Time</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- All attendance records will be inserted here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Add this modal for face registration -->
+<div id="face-reg-modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h3>Face Registration</h3>
+    <p>Please position your face in the frame and click Register Face</p>
+    <div id="video-container">
+      <video id="video" width="400" height="300" autoplay muted></video>
+      <canvas id="canvas" width="400" height="300" style="display:none;"></canvas>
+    </div>
+    <button id="register-face-btn">Register Face</button>
+    <div id="face-reg-status"></div>
+  </div>
+</div>
+
+<!-- Add this modal for face verification -->
+<div id="face-verify-modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close-verify-modal">&times;</span>
+    <h3>Face Verification</h3>
+    <p>Please position your face in the frame to mark attendance</p>
+    <div id="verify-video-container">
+      <video id="verify-video" width="400" height="300" autoplay muted></video>
+      <canvas id="verify-canvas" width="400" height="300" style="display:none;"></canvas>
+    </div>
+    <button id="verify-face-btn">Verify Face</button>
+    <div id="face-verify-status"></div>
+  </div>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>

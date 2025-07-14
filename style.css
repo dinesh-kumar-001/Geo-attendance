@@ -1,0 +1,321 @@
+/* General styles */
+body {
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+  background-image: url("ksrei_bg1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#logo-container {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+#attendance-logo {
+  width: 130px;
+  height: auto;
+}
+
+h2, h3 {
+  color: #333;
+}
+
+/* Forms */
+#register-form, #login-form, #forgot-password-form, #reset-password-form {
+  margin-top: 20px;
+  background-color: #ffffffbb;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 40%;
+  margin: 20px auto;
+}
+
+input, button, select {
+  padding: 10px;
+  margin: 5px;
+  font-size: 16px;
+  width: 80%;
+  max-width: 300px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+#login-btn, #register-btn, #export-pdf-btn, #reset-btn, #update-btn,
+#export-all-pdf-btn {
+  background-color: #0163b4;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#login-here, #register-here, #forgot-password {
+  color: #fe9901;
+  text-decoration: none;
+}
+
+#login-here:hover, #register-here:hover, #forgot-password:hover {
+  color: #feb444;
+  text-decoration: underline;
+}
+
+#mark-attendance-btn {
+  background-color: #0eda89;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#logout-btn, #admin-logout-btn {
+  background-color: rgb(255, 0, 0);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#login-btn:hover, #register-btn:hover, #export-pdf-btn:hover, 
+#reset-btn:hover, #update-btn:hover, #export-all-pdf-btn:hover {
+  background-color: #0076d6;
+}
+
+#mark-attendance-btn:hover {
+  background-color: rgb(0, 152, 0);
+}
+
+#logout-btn:hover, #admin-logout-btn:hover {
+  background-color: rgb(214, 0, 0);
+}
+
+/* Error messages */
+#error-message, #reset-error-message {
+  color: red;
+  display: none;
+  margin: 10px 0;
+}
+
+/* Location status */
+#location-status {
+  color: rgb(0, 152, 0);
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+/* Attendance data */
+#attendance-form {
+  margin-bottom: 15px;
+}
+
+#attendance-data, #admin-dashboard {
+  margin-top: 20px;
+  background-color: #ffffffbb;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 50%;
+  margin: 20px auto;
+}
+
+#table-container {
+  max-height: 160px;
+  overflow-y: scroll;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+#admin-table-container {
+  max-height: 200px;
+  overflow-y: scroll;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+#attendance-table, #admin-attendance-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#attendance-table th, #attendance-table td,
+#admin-attendance-table th, #admin-attendance-table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+#attendance-table th, #admin-attendance-table th {
+  background-color: #fe9901;
+  color: white;
+  position: sticky;
+  top: 0;
+}
+
+#attendance-table td, #admin-attendance-table td {
+  background-color: #f9f9f9;
+}
+
+#attendance-table td:hover, #admin-attendance-table td:hover {
+  background-color: #f1f1f1;
+}
+
+/* Admin controls */
+.admin-controls {
+  margin-bottom: 20px;
+}
+
+.admin-controls button {
+  margin: 0 10px;
+  padding: 10px 20px;
+}
+
+/* Password toggle icons */
+.fa-eye, .fa-eye-slash {
+  color: #666;
+  padding: 10px;
+}
+
+.fa-eye:hover, .fa-eye-slash:hover {
+  color: #333;
+}
+
+input[type="password"], input[type="text"] {
+  padding-right: 35px !important;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  #register-form, #login-form, #forgot-password-form, #reset-password-form {
+    width: 90%;
+    padding: 15px;
+  }
+
+  #attendance-data, #admin-dashboard {
+    width: 95%;
+    padding: 10px;
+  }
+
+  input, button, select {
+    width: 90%;
+  }
+}
+
+#admin-dashboard {
+  margin-top: 20px;
+  background-color: #ffffffbb;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 70%;
+  margin: 20px auto;
+}
+
+/* Custom scrollbar styling */
+#table-container::-webkit-scrollbar,
+#admin-table-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+#table-container::-webkit-scrollbar-track,
+#admin-table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 5px;
+}
+
+#table-container::-webkit-scrollbar-thumb,
+#admin-table-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+#table-container::-webkit-scrollbar-thumb:hover,
+#admin-table-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Face Registration Modal Styles */
+#face-reg-modal, #face-verify-modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.close-modal, .close-verify-modal {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-modal:hover, .close-verify-modal:hover {
+  color: black;
+}
+
+#video-container, #verify-video-container {
+  margin: 20px auto;
+  border: 2px solid #0163b4;
+  border-radius: 5px;
+  position: relative;
+  width: 400px;
+  height: 300px;
+}
+
+#register-face-btn, #verify-face-btn {
+  background-color: #0163b4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+#register-face-btn:hover, #verify-face-btn:hover {
+  background-color: #014a8a;
+}
+
+#face-reg-status, #face-verify-status {
+  margin-top: 15px;
+  font-weight: bold;
+  min-height: 20px;
+}
+
+/* Loading spinner */
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border-left-color: #09f;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+  display: none;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
